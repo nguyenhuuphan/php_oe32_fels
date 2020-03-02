@@ -12,4 +12,5 @@ npm-debug.log
 yarn-error.log
 /~
 /.vscode
-/public/components
+/public/components/
+/public/components/jquery
