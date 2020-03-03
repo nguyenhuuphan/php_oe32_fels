@@ -64,6 +64,12 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="social-login">
+                            <a href="{{ route('redirect_social', ['social' => 'facebook']) }}" class="btn btn-primary">Facebook</a>
+                            <a href="{{ route('redirect_social', ['social' => 'google']) }}" class="btn btn-primary">Google</a>
+                            <a href="{{ route('redirect_social', ['social' => 'twitter']) }}" class="btn btn-primary">Twitter</a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -11,4 +11,5 @@ return [
     'policy' => 'Privacy Policy',
     'email' => 'Email',
     'phone' => 'Phone',
+    'name' => 'Name',
 ];

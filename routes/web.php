@@ -21,3 +21,6 @@ Route::view('/privacy-policy', 'layout.static_pages.privacy_policy')->name('stat
 Auth::routes();
 
 Route::get('/about', 'HomeController@index')->name('static_pages.about');
+
+Route::get('/redirect/{social}', 'Auth\AuthSocialController@redirect')->name('redirect_social');
+Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');

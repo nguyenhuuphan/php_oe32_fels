@@ -40,15 +40,19 @@
                                     </ul>
                                     <div class="top_bar_login ml-auto">
                                         @auth
-                                        <a href="">@lang('common.dashboard')</a>
+                                            <div class="login_button">
+                                                <a href="">@lang('common.dashboard')</a>
+                                                | 
+                                                <a data="{{ route('logout') }}" id="logout-btn">@lang('auth.logout')</a>
+                                            </div>
                                         @else
-                                        <div class="login_button">
-                                            <a href="">@lang('auth.login')</a>
-                                            | 
-                                            @if (Route::has('register'))
-                                            <a href="">@lang('auth.register')</a>
-                                            @endif
-                                        </div>
+                                            <div class="login_button">
+                                                <a href="{{ route('login') }}">@lang('auth.login')</a>
+                                                | 
+                                                @if (Route::has('register'))
+                                                <a href="{{ route('register') }}">@lang('auth.register')</a>
+                                                @endif
+                                            </div>
                                         @endauth
                                     </div>
                                 </div>
