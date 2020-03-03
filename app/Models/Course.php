@@ -18,6 +18,7 @@ class Course extends Model
     protected $fillable = [
         'name',
         'description',
+        'image',
     ];
 
     public function words()

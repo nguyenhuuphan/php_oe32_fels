@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Enums\UserRole;
 
-class checkRole
+class AdminRole
 {
     /**
      * Handle an incoming request.
@@ -13,10 +14,10 @@ class checkRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next)
     {
-        if ($request->user()->role != $role) {
-            return redirect('/');
+        if ($request->user()->role != UserRole::Administrator) {
+            return abort('403', 'Unauthorized action.');
         }
         return $next($request);
     }

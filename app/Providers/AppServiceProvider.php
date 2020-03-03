@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
+use App\Enums\UserRole;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
+
+        Blade::if('admin', function () {
+            return auth()->user() && auth()->user()->role == UserRole::Administrator;
+        });
     }
 }

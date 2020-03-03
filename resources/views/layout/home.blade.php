@@ -6,6 +6,7 @@
 
 @section('content')
 
+
 <!-- Popular Courses -->
 
 <div class="courses">
@@ -19,54 +20,32 @@
                 </div>
             </div>
         </div>
+
         <div class="row courses_row">
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="images/course_1.jpg" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Software Training</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+            @if ($courses)
+                @foreach ($courses as $course)
+                    <div class="col-lg-4 course_col">
+                        <div class="course">
+                            <div class="course_image"><img src="{{ asset('storage/uploads/' . $course->image) }}"></div>
+                            <div class="course_body">
+                                <h3 class="course_title"><a href="{{ route('course.show', $course->id) }}">{{ $course->name }}</a></h3>
+                                <div class="course_text">
+                                    {{ Str::words($course->description, 15) }}
+                                </div>
+                            </div>
+                            <div class="course_footer">
+                                <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="course_footer">
-                        <div class="courses_button trans_200"><a href="#">Learn</a></div>
-                    </div>
+                @endforeach
+            @else
+                <div class="noti-wrapper">
+                    <span class="noti-error">
+                        @lang('course.noti_no_course')
+                    </span>
                 </div>
-            </div>
-            
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="images/course_2.jpg" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Developing Mobile Apps</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                    <div class="course_footer">
-                        <div class="courses_button trans_200"><a href="#">Learn</a></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="images/course_3.jpg" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Starting a Startup</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                    <div class="course_footer">
-                        <div class="courses_button trans_200"><a href="#">Learn</a></div>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </div>
