@@ -11,16 +11,21 @@
 |
 */
 
-Route::view('/home', 'layout.home')->name('home');
+Route::get('/home', 'CourseController@index')->name('home');
 
-Route::view('/', 'layout.home')->name('home');
+Route::get('/', 'CourseController@index')->name('home');
 
 Route::view('/terms-of-use', 'layout.static_pages.terms')->name('static_pages.terms');
 Route::view('/privacy-policy', 'layout.static_pages.privacy_policy')->name('static_pages.privacy_policy');
+Route::view('/about', 'layout.static_pages.about')->name('static_pages.about');
 
 Auth::routes();
 
-Route::get('/about', 'HomeController@index')->name('static_pages.about');
-
 Route::get('/redirect/{social}', 'Auth\AuthSocialController@redirect')->name('redirect_social');
 Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::resource('course', 'CourseController')->except(['show']);
+});
+
+Route::get('/course/{id}', 'CourseController@show')->name('course.show');
