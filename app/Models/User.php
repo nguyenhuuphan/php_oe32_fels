@@ -10,7 +10,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Follower;
 use App\Models\Activity;
-use App\Models\WordLearned;
+use App\Models\Word;
 
 class User extends Authenticatable
 {
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function course()
     {
-        return $this->hasOne(Course::class);
+        return $this->hasOne(Course::class, 'id', 'course_id');
     }
 
     public function result()
@@ -70,6 +70,6 @@ class User extends Authenticatable
 
     public function wordLearned()
     {
-        return $this->hasMany(WordLearned::class);
+        return $this->belongsToMany(Word::class, 'word_learned');
     }
 }

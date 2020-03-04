@@ -12,4 +12,7 @@ return [
     'email' => 'Email',
     'phone' => 'Phone',
     'name' => 'Name',
+    'course' => 'Course',
+    'update' => 'Update',
+    'follow' => 'Follow',
 ];

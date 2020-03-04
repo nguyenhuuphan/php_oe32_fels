@@ -29,3 +29,8 @@ Route::group(['middleware' => ['admin']], function () {
 });
 
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
+Route::get('/dashboard', 'UserController@index')->name('user.dashboard');
+
+Route::get('/profile/{id}', 'UserController@profile')->name('profile');
+Route::get('/profile/update', 'UserController@edit')->name('profile.edit');
+Route::patch('/profile/update', 'UserController@update')->name('profile.update');

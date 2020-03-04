@@ -41,7 +41,7 @@
                                     <div class="top_bar_login ml-auto">
                                         @auth
                                             <div class="login_button">
-                                                <a href="">@lang('common.dashboard')</a>
+                                                <a href="{{ route('user.dashboard') }}">@lang('common.dashboard')</a>
                                                 | 
                                                 <a data="{{ route('logout') }}" id="logout-btn">@lang('auth.logout')</a>
                                             </div>
