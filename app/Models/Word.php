@@ -26,6 +26,6 @@ class Word extends Model
 
     public function wordLearned()
     {
-        return $this->belongsToMany(User::class, 'word_learned_table', 'word_id', 'user_id');
+        return $this->belongsToMany(User::class, 'word_learned');
     }
 }

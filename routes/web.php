@@ -26,6 +26,12 @@ Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
 
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('course', 'CourseController')->except(['show']);
+    Route::resource('user', 'UserController')->except(['show', 'edit', 'update']);
 });
 
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
+
+Route::get('/user/{id}', 'UserController@show')->name('user.show');
+Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
+Route::patch('/user/{id}/update', 'UserController@update')->name('user.update');
+Route::get('/dashboard', 'UserController@index')->name('user.dashboard');
