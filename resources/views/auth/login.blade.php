@@ -1,76 +1,83 @@
-@extends('layouts.app')
+@extends('layout.master')
+
+@section('title')
+    @lang('auth.login')
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">@lang('auth.login')</div>
-                
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">@lang('auth.email_address')</label>
+
+<div class="about">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">@lang('auth.login')</div>
+                    
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
                             
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">@lang('auth.email_address')</label>
                                 
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('auth.password')</label>
-                            
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     
-                                    <label class="form-check-label" for="remember">
-                                        @lang('auth.remember_me')
-                                    </label>
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('auth.login')
-                                </button>
+                            
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">@lang('auth.password')</label>
                                 
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    @lang('auth.forget_password')
-                                </a>
-                                @endif
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        
+                                        <label class="form-check-label" for="remember">
+                                            @lang('auth.remember_me')
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        @lang('auth.login')
+                                    </button>
+                                    
+                                    @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        @lang('auth.forget_password')
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
 
-                        <div class="social-login">
-                            <a href="{{ route('redirect_social', ['social' => 'facebook']) }}" class="btn btn-primary">Facebook</a>
-                            <a href="{{ route('redirect_social', ['social' => 'google']) }}" class="btn btn-primary">Google</a>
-                            <a href="{{ route('redirect_social', ['social' => 'twitter']) }}" class="btn btn-primary">Twitter</a>
-                        </div>
-                    </form>
+                            <div class="social-login text-center mt-2">
+                                <a href="{{ route('redirect_social', ['social' => 'facebook']) }}" class="btn btn-primary">Facebook</a>
+                                <a href="{{ route('redirect_social', ['social' => 'google']) }}" class="btn btn-primary">Google</a>
+                                <a href="{{ route('redirect_social', ['social' => 'twitter']) }}" class="btn btn-primary">Twitter</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

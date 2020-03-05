@@ -69,7 +69,7 @@
                         <div class="col">
                             <div class="header_content d-flex flex-row align-items-center justify-content-start">
                                 <div class="logo_container">
-                                    <a href="#">
+                                    <a href="{{ route('home') }}">
                                         <div class="logo_text">Unic<span>at</span></div>
                                     </a>
                                 </div>
@@ -77,6 +77,9 @@
                                     <ul class="main_nav">
                                         <li class="active"><a href="{{ route('home') }}">@lang('common.home')</a></li>
                                         <li><a href="{{ route('static_pages.about') }}">@lang('common.about')</a></li>
+                                        @admin
+                                            <li><a href="{{ route('course.create') }}">@lang('course.create')</a>
+                                        @endadmin
                                     </ul>
                                     <div class="hamburger menu_mm">
                                         <i class="fas fa-bars menu_mm" aria-hidden="true"></i>
