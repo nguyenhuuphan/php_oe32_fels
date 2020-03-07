@@ -232,6 +232,9 @@ section
 {
 	padding: 0px !important;
 }
+.progress span {
+	display: contents;
+}
 
 /*********************************
 2. Header

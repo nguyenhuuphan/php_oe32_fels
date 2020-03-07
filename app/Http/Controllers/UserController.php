@@ -58,4 +58,17 @@ class UserController extends Controller
         $this->userRepository->update($inputs, $request->user()->id);
         return redirect()->route('profile.dashboard');
     }
+
+    public function chooseCourse(Request $request, $course_id)
+    {
+        $current_course = $request->user()->course()->first();
+        if ($current_course) {
+            if ($current_course->id == $course_id) {
+                return redirect()->route('course.show', $course_id);
+            }
+            return redirect()->back()->withErrors(['Please finish your current course before starting another!']);
+        }
+        $this->userRepository->update(['course_id' => $course_id], $request->user()->id);
+        return redirect()->route('course.show', $course_id);
+    }
 }
