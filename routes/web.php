@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/home', 'CourseController@index')->name('home');
-
+Route::get('/home', 'CourseController@index');
+Route::get('/course', 'CourseController@index');
 Route::get('/', 'CourseController@index')->name('home');
 
 Route::view('/terms-of-use', 'layout.static_pages.terms')->name('static_pages.terms');
@@ -24,12 +24,14 @@ Auth::routes();
 Route::get('/redirect/{social}', 'Auth\AuthSocialController@redirect')->name('redirect_social');
 Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
 
+Route::get('/dashboard', 'UserController@index')->name('user.dashboard');
+Route::get('/follow/{id}', 'UserController@following')->name('user.follow');
+Route::get('/course/{id}/choose', 'UserController@chooseCourse')->name('user.choose_course');
+
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('course', 'CourseController')->except(['show']);
 });
-
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
-Route::get('/dashboard', 'UserController@index')->name('user.dashboard');
 
 Route::get('/profile/{id}', 'UserController@profile')->name('profile');
 Route::get('/profile/update', 'UserController@edit')->name('profile.edit');

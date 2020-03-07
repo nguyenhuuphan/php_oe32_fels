@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     
     <link rel="stylesheet" href="{{ asset('components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('components/Font-Awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
@@ -174,6 +175,7 @@
     
     <script src="{{ asset('components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('components/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
