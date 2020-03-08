@@ -79,6 +79,7 @@
                                         <li><a href="{{ route('static_pages.about') }}">@lang('common.about')</a></li>
                                         @admin
                                             <li><a href="{{ route('course.create') }}">@lang('course.create')</a>
+                                            <li><a href="{{ route('lesson.create') }}">@lang('lesson.create')</a>
                                         @endadmin
                                     </ul>
                                     <div class="hamburger menu_mm">

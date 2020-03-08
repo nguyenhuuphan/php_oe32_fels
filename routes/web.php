@@ -26,6 +26,7 @@ Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
 
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('course', 'CourseController')->except(['show']);
+    Route::resource('lesson', 'LessonController');
 });
 
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
