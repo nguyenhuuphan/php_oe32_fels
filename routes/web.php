@@ -27,11 +27,17 @@ Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
 Route::get('/dashboard', 'UserController@index')->name('user.dashboard');
 Route::get('/follow/{id}', 'UserController@following')->name('user.follow');
 Route::get('/course/{id}/choose', 'UserController@chooseCourse')->name('user.choose_course');
+Route::post('/learn/{id}', 'WordLearnController@wordLearn')->name('user.word_learn');
 
 Route::group(['middleware' => ['admin']], function () {
-    Route::resource('course', 'CourseController')->except(['show']);
+    Route::resource('course', 'CourseController')->except(['show', 'words']);
 });
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
+Route::get('/course/{id}/words', 'CourseController@words')->name('course.words')->middleware(['auth', 'CheckCourse']);
+Route::get('/course/{id}/lesson', 'CourseController@lesson')->name('course.lesson')->middleware(['auth', 'CheckCourse']);
+
+Route::post('/answer', 'LessonController@answer')->name('lesson.answer')->middleware(['auth']);
+Route::get('/course/{id}/endlesson', 'LessonController@endLesson')->name('lesson.end_lesson')->middleware(['auth']);
 
 Route::get('/profile/{id}', 'UserController@profile')->name('profile');
 Route::get('/profile/update', 'UserController@edit')->name('profile.edit');
