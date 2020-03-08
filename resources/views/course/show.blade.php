@@ -32,7 +32,16 @@
                         </div>
                     </div>
                     <div class="course_footer">
-                        {{-- <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div> --}}
+                        @auth
+                            @if (auth::user()->course()->first())
+                                @if (auth::user()->course()->first()->id == $course->id)
+                                    <div class="courses_button trans_200"><a href="{{ route('course.words', $course->id) }}">@lang('course.words')</a></div>
+                                    <div class="courses_button trans_200"><a href="{{ route('course.lesson', $course->id) }}">@lang('course.lesson')</a></div>
+                                @endif
+                            @else
+                                <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div>
+                            @endif
+                        @endauth
                         @admin
                             <div class="courses_button trans_200"><a href="{{ route('course.edit', $course->id) }}">@lang('common.edit')</a></div>
                             <div class="courses_button trans_200">

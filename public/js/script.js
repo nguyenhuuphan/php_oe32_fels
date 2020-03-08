@@ -102,9 +102,79 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    window.location.href = '/login';
+                    window.location.replace(response.url);
+                } else {
+                    window.location.replace(response.url);
                 }
             },
         });
     })
+
+    $(function() {
+        $('.word-toggle').change(function(e) {
+            var check = $(this).prop('checked');
+            var url = $(this).data('url');
+            $.ajax({
+                type: "POST",
+                url: url,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'check': check,
+                },
+                success: function(response) {
+                    //
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        })
+    })
+
+    $('input.answer-btn').change(function() {
+        var target = $(this);
+        target.parent().addClass('choose');
+        target.parent().parent().find("li:not(.choose)").each(function(){
+            $(this).css('text-decoration', 'line-through');
+            $(this).find('input').prop('disabled', true);
+        });
+        var answer_id = target.val();
+        var question_id = target.data('question');
+        var url = target.data('url');
+        $.ajax({
+            type: "POST",
+            url: url,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                'answer_id': answer_id,
+                'question_id': question_id,
+            },
+            success: function(response) {
+                if (response.flag) {
+                    target.parent().addClass('text-success');
+                } else {
+                    target.parent().addClass('text-danger');
+                    target.parent().parent().find("li input[value="+ response.right_answer +"]").parent().css({
+                            'text-decoration': 'none',
+                            'color': 'green',
+                    });
+                }
+                var questions_count = $('.progress-bar span.questions').text();
+                var percent = (response.answered / questions_count) * 100;
+                target.closest('.card').find('a.card-link').addClass('text-info');
+                $('.progress-bar span.answers').text(response.answered);
+                $('.progress-bar .progress-bar').css({
+                    'width': percent + '%',
+                });
+            },
+            error: function(error) {
+                console.log('error');
+            }
+        });
+    })
+
 });

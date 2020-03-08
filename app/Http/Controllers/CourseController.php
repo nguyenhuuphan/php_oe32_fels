@@ -82,4 +82,18 @@ class CourseController extends Controller
         Storage::disk('public')->delete($course->image);
         return redirect()->route('home')->withErrors(['msg' => "Course $course->name had been deleted!"]);
     }
+
+    public function words($course_id)
+    {
+        $course = $this->courseRepository->find($course_id);
+        $words = $course->words()->get();
+        return view('course.words', compact('course', 'words'));
+    }
+
+    public function lesson($course_id)
+    {
+        $course = $this->courseRepository->find($course_id);
+        $lesson = $course->lesson()->first();
+        return view('course.lesson', compact('course', 'lesson'));
+    }
 }
