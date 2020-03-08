@@ -13,6 +13,8 @@ return [
     'phone' => 'Phone',
     'name' => 'Name',
     'course' => 'Course',
+    'lesson' => 'Lesson',
+    'result' => 'Result',
     'update' => 'Update',
     'follow' => 'Follow',
 ];

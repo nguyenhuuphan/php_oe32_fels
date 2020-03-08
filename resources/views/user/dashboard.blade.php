@@ -30,6 +30,7 @@
 
                                             @if ($user->course()->first())
                                                 <h4>@lang('dashboard.course') <a href="{{ route('course.show', $user->course()->first()->id) }}">{{ $user->course()->first()->name }}</a></h4>
+                                                <h4><a href="{{ route('lesson.result', $user->course()->first()->id) }}">@lang('common.result')</a></h4>
                                             @else
                                                 <h4>@lang('dashboard.course') <a href="{{ route('home') }}">@lang('dashboard.choose_course')</a></h4>
                                             @endif

@@ -38,6 +38,7 @@ Route::get('/course/{id}/lesson', 'CourseController@lesson')->name('course.lesso
 
 Route::post('/answer', 'LessonController@answer')->name('lesson.answer')->middleware(['auth']);
 Route::get('/course/{id}/endlesson', 'LessonController@endLesson')->name('lesson.end_lesson')->middleware(['auth']);
+Route::get('/course/{id}/result', 'LessonController@result')->name('lesson.result')->middleware(['auth']);
 
 Route::get('/profile/{id}', 'UserController@profile')->name('profile');
 Route::get('/profile/update', 'UserController@edit')->name('profile.edit');

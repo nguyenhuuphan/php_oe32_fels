@@ -59,4 +59,11 @@ class LessonController extends Controller
         ]);
         return redirect()->route('lesson.result', $course_id);
     }
+
+    public function result(Request $request, $course_id)
+    {
+        $course = $this->courseRepository->find($course_id);
+        $result = $request->user()->result()->first()->result;
+        return view('course.result', compact('course', 'result'));
+    }
 }
