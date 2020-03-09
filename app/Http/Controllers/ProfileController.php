@@ -6,42 +6,40 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
+
 use App\Http\Requests\UserRequest;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     private $userRepository;
     public function __construct(UserRepository $userRepository)
     {
+        $this->middleware('auth')->except('profile');
         $this->userRepository = $userRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->userRepository->paginate(15);
-        return view('user.index', compact('users'));
+        $user = $request->user();
+        return view('user.dashboard', compact('user'));
     }
 
-    public function show($id)
+    public function profile($id)
     {
-        try {
-            $user = $this->userRepository->find($id);
-        } catch (ModelNotFoundException $err) {
-            return redirect()->back()->withErrors(['User Not Found']);
-        }
-        return view('user.show', compact('user'));
+        $user = $this->userRepository->find($id);
+        return view('user.profile', compact('user'));
     }
 
-    public function edit($user_id)
+    public function edit(Request $request)
     {
-        $user = $this->userRepository->find($user_id);
+        $user = $request->user();
         return view('user.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, $user_id)
+    public function update(UserRequest $request)
     {
         $inputs = $request->except(['password_confirmation']);
         $image = $request->file('avatar');

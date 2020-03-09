@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="course_footer">
-                                <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div>
+                                {{-- <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div> --}}
                             </div>
                         </div>
                     </div>

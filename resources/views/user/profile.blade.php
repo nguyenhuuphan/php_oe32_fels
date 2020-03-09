@@ -62,7 +62,7 @@
                                             @if (count($user->followers()->get()) > 0)
                                                 @foreach ($user->followers()->get() as $follower)
                                                     <h5>
-                                                        <a href="{{ route('profile', $follower->follower_user()->first()->id) }}">
+                                                        <a href="{{ route('user.show', $follower->follower_user()->first()->id) }}">
                                                             {{ $follower->follower_user()->first()->name }}
                                                         </a>
                                                     </h5>
@@ -77,7 +77,9 @@
                                                 @if (!auth::user()->followers()->get('follower_id')->contains('follower_id', $user->id))
                                                     <div class="courses_button trans_200"><a href="{{ route('user.follow', $user->id) }}">@lang('common.follow')</a></div>
                                                 @endif
-                                                <div class="courses_button trans_200"><a href="{{ route('profile.edit') }}">@lang('dashboard.update')</a></div>
+                                                @admin
+                                                    <div class="courses_button trans_200"><a href="{{ route('user.edit', $user->id) }}">@lang('dashboard.update')</a></div>
+                                                @endadmin
                                             @endauth
                                         </div>
                                     </div>

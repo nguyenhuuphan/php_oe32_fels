@@ -11,4 +11,9 @@ class UserRepository extends BaseRepository
     {
         return 'App\Models\User';
     }
+
+    public function paginate($limit)
+    {
+        return $this->model->orderBy('created_at', 'desc')->paginate($limit);
+    }
 }
