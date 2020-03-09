@@ -27,6 +27,12 @@ Route::get('/callback/{social}', 'Auth\AuthSocialController@callback');
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('course', 'CourseController')->except(['show']);
     Route::resource('lesson', 'LessonController');
+    Route::resource('question', 'QuestionController');
+    Route::resource('answer', 'AnswerController');
+    Route::resource('word', 'WordController');
+    Route::post('/question/right_answer', 'QuestionController@rightAnswer')->name('question.right_answer');
 });
 
 Route::get('/course/{id}', 'CourseController@show')->name('course.show');
+
+Route::get('/course/{id}/words', 'CourseController@words')->name('course.words')->middleware(['auth']);

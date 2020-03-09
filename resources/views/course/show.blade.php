@@ -42,6 +42,7 @@
                                     <button type="submit">@lang('common.delete')</button>
                                 </form>
                             </div>
+                            <div class="courses_button trans_200"><a href="{{ route('course.words', $course->id) }}">@lang('common.word')</a></div>
                             @if ($course->lesson)
                                 <div class="courses_button trans_200"><a href="{{ route('lesson.show', $course->lesson->id) }}">@lang('common.lesson')</a></div>
                             @else
