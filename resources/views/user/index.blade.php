@@ -33,6 +33,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
+                                @dd($user->currentpage())
                                     <tr>
                                         <td>{{ ($users ->currentpage()-1) * $users ->perpage() + $loop->index + 1 }}</td>
                                         <td><a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a></td>
