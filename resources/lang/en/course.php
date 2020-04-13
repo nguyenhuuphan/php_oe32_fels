@@ -20,5 +20,6 @@
         'word_learning_result' => 'Word Learning Result',
         'right_words' => 'Right Words',
         'wrong_words' => 'Wrong Words',
+        'noti_no_word' => 'Can\'t found any word',
     ];
     

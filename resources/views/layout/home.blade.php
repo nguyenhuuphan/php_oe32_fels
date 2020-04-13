@@ -22,7 +22,7 @@
         </div>
 
         <div class="row courses_row">
-            @if ($courses)
+            @if (count($courses))
                 @foreach ($courses as $course)
                     <div class="col-lg-4 course_col">
                         <div class="course">

@@ -58,6 +58,14 @@
                                     @enderror
                                 </div>
                             </div>
+    
+                            <div class="form-group row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('auth.confirm_password')</label>
+    
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="avatar" class="col-md-4 col-form-label text-md-right">@lang('user.avatar')</label>
@@ -77,8 +85,8 @@
                                 
                                 <div class="col-md-6">
                                     <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" autocomplete="role" autofocus>
-                                        <option value="0">@lang('user.administrator')</option>
-                                        <option value="1" selected>@lang('user.user')</option>
+                                        <option value=1>@lang('user.administrator')</option>
+                                        <option value=0 selected>@lang('user.user')</option>
                                     </select>
                                     @error('role')
                                     <span class="invalid-feedback" role="alert">

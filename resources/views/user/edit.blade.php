@@ -88,8 +88,8 @@
                                     
                                     <div class="col-md-6">
                                         <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" autocomplete="role" autofocus>
-                                            <option value=0>@lang('user.administrator')</option>
-                                            <option value=1 selected>@lang('user.user')</option>
+                                            <option value=1>@lang('user.administrator')</option>
+                                            <option value=0 selected>@lang('user.user')</option>
                                         </select>
                                         @error('role')
                                         <span class="invalid-feedback" role="alert">

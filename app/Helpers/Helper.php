@@ -14,7 +14,7 @@ class Helper
         return WordType::getKeys();
     }
 
-    public static function getWordType($type)
+    public static function getWordType(int $type)
     {
         return WordType::getKey($type);
     }
@@ -24,7 +24,7 @@ class Helper
         return QuestionType::getKeys();
     }
 
-    public static function getQuestionType($type)
+    public static function getQuestionType(int $type)
     {
         return QuestionType::getKey($type);
     }
@@ -35,5 +35,10 @@ class Helper
             return true;
         }
         return false;
+    }
+
+    public static function getUserRole(int $role)
+    {
+        return UserRole::getKey($role);
     }
 }

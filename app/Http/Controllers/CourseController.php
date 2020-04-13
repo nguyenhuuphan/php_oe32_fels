@@ -101,7 +101,11 @@ class CourseController extends Controller
         } else {
             $course = $this->courseRepository->find($course_id);
             $lesson = $course->lesson()->first();
-            return view('course.lesson', compact('course', 'lesson'));
+            if ($lesson) {
+                return view('course.lesson', compact('course', 'lesson'));
+            } else {
+                abort(404);
+            }
         }
     }
 }

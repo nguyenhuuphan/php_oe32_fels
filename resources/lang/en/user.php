@@ -9,4 +9,5 @@
         'administrator' => 'Administrator',
         'user' => 'User',
         'role' => 'Role',
+        'no_user' => 'No User Found!'
     ];

@@ -26,47 +26,55 @@
                         <div class="tab_panels">
                             <div class="tab_panel active">
                                 <div class="tab_panel_content">
-                                    <div class="row list-words">
-                                        @foreach ($words as $word)
-                                        <div class="col-12 mb-2" id="word-{{ $word->id }}">
-                                            <div class="row">
-                                                <div class="col-9 m-auto word-content">
+                                    @if (count($words))
+                                        <div class="row list-words">
+                                            @foreach ($words as $word)
+                                                <div class="col-12 mb-2" id="word-{{ $word->id }}">
                                                     <div class="row">
-                                                        <div class="col-3 word-image">
-                                                            <img src="{{ asset('storage/uploads/' . $word->image) }}">
+                                                        <div class="col-9 m-auto word-content">
+                                                            <div class="row">
+                                                                <div class="col-3 word-image">
+                                                                    <img src="{{ asset('storage/uploads/' . $word->image) }}">
+                                                                </div>
+                                                                <div class="col-9 word-info">
+                                                                    <h4 class="word-name">{{ $word->name }}</h4>
+                                                                    <p class="m-0 word-spelling">{{ $word->spelling }}</p>
+                                                                    <span class="m-0 word-audio">
+                                                                        <a class="item-sound main-sound-play" href="javascript:void(0)" sound_url="{{ asset('storage/uploads/' . $word->audio) }}"></a>
+                                                                    </span>
+                                                                    <p class="m-0 word-mean">{{ $word->mean }}</p>
+                                                                    <p class="word-type">{{ Helper::getWordType($word->type) }}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-9 word-info">
-                                                            <h4 class="word-name">{{ $word->name }}</h4>
-                                                            <p class="m-0 word-spelling">{{ $word->spelling }}</p>
-                                                            <span class="m-0 word-audio">
-                                                                <a class="item-sound main-sound-play" href="javascript:void(0)" sound_url="{{ asset('storage/uploads/' . $word->audio) }}"></a>
-                                                            </span>
-                                                            <p class="m-0 word-mean">{{ $word->mean }}</p>
-                                                            <p class="word-type">{{ Helper::getWordType($word->type) }}</p>
+                                                        <div class="col-3 word-action">
+                                                            @admin
+                                                            <a href="{{ route('word.edit', $word->id) }}">@lang('common.edit')</a>
+                                                            | 
+                                                            <a id="word-del-btn" data-url="{{ route('word.destroy', $word->id) }}" data-id={{ $word->id }}>@lang('common.delete')</a>
+                                                            @endadmin
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-3 word-action">
-                                                    @admin
-                                                    <a href="{{ route('word.edit', $word->id) }}">@lang('common.edit')</a>
-                                                    | 
-                                                    <a id="word-del-btn" data-url="{{ route('word.destroy', $word->id) }}" data-id={{ $word->id }}>@lang('common.delete')</a>
-                                                    @endadmin
-                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="row">
+                                            <div class="pagination">
+                                                {!! $words->links() !!}
                                             </div>
                                         </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="row">
-                                        <div class="pagination">
-                                            {!! $words->links() !!}
+                                        <div class="row">
+                                            <div class="col-12 text-center mt-3">
+                                                <a class="btn btn-info" href="{{ route('course.learning', $course->id) }}">Start Learning</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 text-center mt-3">
-                                            <a class="btn btn-info" href="{{ route('course.learning', $course->id) }}">Start Learning</a>
+                                    @else
+                                        <div class="noti-wrapper">
+                                            <span class="noti-error">
+                                                @lang('course.noti_no_word')
+                                            </span>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             

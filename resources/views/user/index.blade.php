@@ -20,44 +20,55 @@
                     </div>
                     <!-- Course Tabs -->
                     <div class="course_tabs_container">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>@lang('common.name')</th>
-                                    <th>@lang('common.email')</th>
-                                    <th>@lang('common.course')</th>
-                                    <th>@lang('user.role')</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                @dd($user->currentpage())
+                        @if (count($users))
+                            <table class="table table-striped table-hover">
+                                <thead>
                                     <tr>
-                                        <td>{{ ($users ->currentpage()-1) * $users ->perpage() + $loop->index + 1 }}</td>
-                                        <td><a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a></td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->course['name'] }}</td>
-                                        <td>{{ $user->role }}</td>
-                                        <td>
-                                            <a href="{{ route('user.edit', $user->id) }}">@lang('common.edit')</a>
-                                             |     
-                                            <form action="{{ route('user.destroy', $user->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit">@lang('common.delete')</button>
-                                            </form>
-                                        </td>
+                                        <th></th>
+                                        <th>@lang('common.name')</th>
+                                        <th>@lang('common.email')</th>
+                                        <th>@lang('common.course')</th>
+                                        <th>@lang('user.role')</th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="6">{!! $users->links() !!}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ ($users ->currentpage()-1) * $users ->perpage() + $loop->index + 1 }}</td>
+                                            <td><a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a></td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                @if (count($user->learningCourse))
+                                                    {{ $user->learningCourse->first()->name }}
+                                                @endif
+                                            </td>
+                                            <td>{{ Helper::getUserRole($user->role) }}</td>
+                                            <td>
+                                                <a href="{{ route('user.edit', $user->id) }}">@lang('common.edit')</a>
+                                                |     
+                                                <form action="{{ route('user.destroy', $user->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">@lang('common.delete')</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6">{!! $users->links() !!}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        @else
+                            <div class="noti-wrapper">
+                                <span class="noti-error">
+                                    @lang('user.no_user')
+                                </span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

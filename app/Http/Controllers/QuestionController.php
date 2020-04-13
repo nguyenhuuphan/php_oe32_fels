@@ -51,11 +51,13 @@ class QuestionController extends Controller
 
     public function destroy($question_id)
     {
-        $this->questionRepository->delete($question_id);
         $answers = $this->questionRepository->find($question_id)->answers;
-        foreach ($answers as $answer) {
-            $this->answerRepository->delete($answer->id);
+        if (count($answers) > 0) {
+            foreach ($answers as $answer) {
+                $this->answerRepository->delete($answer->id);
+            }
         }
+        $this->questionRepository->delete($question_id);
         return response()->json(['status' => true, 'question_id' => $question_id], 200);
     }
     
