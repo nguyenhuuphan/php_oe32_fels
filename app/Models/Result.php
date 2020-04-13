@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
-use App\Models\Lesson;
+use App\Models\Course;
 
 class Result extends Model
 {
@@ -25,8 +25,8 @@ class Result extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function lessons()
+    public function course()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }
