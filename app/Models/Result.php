@@ -16,7 +16,7 @@ class Result extends Model
      */
     protected $fillable = [
         'result',
-        'lesson_id',
+        'course_id',
         'user_id',
     ];
 
@@ -25,8 +25,8 @@ class Result extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function lessons()
+    public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
     }
 }

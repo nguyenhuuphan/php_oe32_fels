@@ -46,14 +46,23 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
-        $request->session()->invalidate();
-        if($request->ajax()) {
-            return response()->json([
-                'success' => true,
-            ]);
+        if ($request->session()->has('result')) {
+            $request->session()->flash('message', 'You\'re taking the lesson of ' . $request->user()->course()->first()->name . '. Please End Lesson to Logout!');
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'url' => route('course.lesson', $request->user()->course_id),
+                ]);
+            }
         } else {
-            return redirect()->route('home');
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'url' => route('login'),
+                ]);
+            }
         }
     }
 }

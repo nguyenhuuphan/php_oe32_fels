@@ -8,8 +8,14 @@
     <title>@yield('title')</title>
     
     <link rel="stylesheet" href="{{ asset('components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('components/Font-Awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <script src="{{ asset('components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('components/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     
 </head>
 <body>
@@ -41,7 +47,7 @@
                                     <div class="top_bar_login ml-auto">
                                         @auth
                                             <div class="login_button">
-                                                <a href="">@lang('common.dashboard')</a>
+                                                <a href="{{ route('user.show', auth::user()->id) }}">@lang('common.dashboard')</a>
                                                 | 
                                                 <a data="{{ route('logout') }}" id="logout-btn">@lang('auth.logout')</a>
                                             </div>
@@ -79,6 +85,8 @@
                                         <li><a href="{{ route('static_pages.about') }}">@lang('common.about')</a></li>
                                         @admin
                                             <li><a href="{{ route('course.create') }}">@lang('course.create')</a>
+                                            <li><a href="{{ route('lesson.create') }}">@lang('lesson.create')</a>
+                                            <li><a href="{{ route('user.index') }}">@lang('user.list_user')</a>
                                         @endadmin
                                     </ul>
                                     <div class="hamburger menu_mm">
@@ -174,9 +182,5 @@
         </footer>
         
     </div>
-    
-    <script src="{{ asset('components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

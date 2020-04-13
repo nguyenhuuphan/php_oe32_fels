@@ -16,7 +16,13 @@ class Word extends Model
      */
     protected $fillable = [
         'name',
+        'image',
+        'spelling',
+        'mean',
+        'def',
+        'type',
         'course_id',
+        'audio',
     ];
 
     public function course()
@@ -26,6 +32,6 @@ class Word extends Model
 
     public function wordLearned()
     {
-        return $this->belongsToMany(User::class, 'word_learned_table', 'word_id', 'user_id');
+        return $this->belongsToMany(User::class, 'word_learned');
     }
 }

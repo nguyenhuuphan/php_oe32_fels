@@ -10,6 +10,5 @@ $factory->define(Question::class, function (Faker $faker) {
     return [
         'question' => $faker->sentence($nbWords = 6, $variableNbWords = true) . '?',
         'lesson_id' => Lesson::all()->random()->id,
-        'answer_id' => $faker->unique()->numberBetween(1, 100),
     ];
 });

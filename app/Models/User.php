@@ -10,7 +10,7 @@ use App\Models\Course;
 use App\Models\Result;
 use App\Models\Follower;
 use App\Models\Activity;
-use App\Models\WordLearned;
+use App\Models\Word;
 
 class User extends Authenticatable
 {
@@ -26,7 +26,7 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
-        'course_id',
+        'role',
     ];
 
     /**
@@ -35,7 +35,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -48,14 +47,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function course()
+    public function courses()
     {
-        return $this->hasOne(Course::class);
+        return $this->belongstoMany(Course::class, 'course_user', 'user_id', 'course_id')->withPivot('status')->withTimestamps();
     }
 
-    public function result()
+    public function learningCourse()
     {
-        return $this->hasOne(Result::class);
+        return $this->belongstoMany(Course::class, 'course_user', 'user_id', 'course_id')->wherePivot('status', false);;
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
     }
 
     public function followers()
@@ -70,6 +74,6 @@ class User extends Authenticatable
 
     public function wordLearned()
     {
-        return $this->hasMany(WordLearned::class);
+        return $this->belongsToMany(Word::class, 'word_learned');
     }
 }

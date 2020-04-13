@@ -32,7 +32,6 @@
                         </div>
                     </div>
                     <div class="course_footer">
-                        {{-- <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div> --}}
                         @admin
                             <div class="courses_button trans_200"><a href="{{ route('course.edit', $course->id) }}">@lang('common.edit')</a></div>
                             <div class="courses_button trans_200">
@@ -42,7 +41,25 @@
                                     <button type="submit">@lang('common.delete')</button>
                                 </form>
                             </div>
+                            <div class="courses_button trans_200"><a href="{{ route('course.words', $course->id) }}">@lang('course.words')</a></div>
+                            @if ($course->lesson)
+                                <div class="courses_button trans_200"><a href="{{ route('lesson.show', $course->lesson->id) }}">@lang('lesson.edit', ['name' => $course->lesson->name])</a></div>
+                            @else
+                                <div class="courses_button trans_200"><a href="{{ route('lesson.create') }}">@lang('lesson.create')</a></div>
+                            @endif
                         @endadmin
+                        @if (auth::check())
+                            @if (auth::user()->learningCourse->first())
+                                @if (auth::user()->learningCourse->first()->id == $course->id)
+                                    <div class="courses_button trans_200"><a href="{{ route('course.words', $course->id) }}">@lang('course.words')</a></div>
+                                    <div class="courses_button trans_200"><a href="{{ route('course.lesson', $course->id) }}">@lang('course.lesson')</a></div>
+                                @endif
+                            @else
+                                <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div>
+                            @endif
+                        @else
+                            <div class="courses_button trans_200"><a href="{{ route('user.choose_course', $course->id) }}">@lang('course.learn')</a></div>
+                        @endif
                     </div>
                 </div>
             </div>

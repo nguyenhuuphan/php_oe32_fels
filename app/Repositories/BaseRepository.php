@@ -35,6 +35,14 @@ abstract class BaseRepository
         return $this->model->findOrFail($id);
     }
 
+    public function where($condition, $operator = null, $value = null)
+    {
+        if (func_num_args() == 2) {
+            list($value, $operator) = [$operator, '='];
+        }
+        return $this->model->where($condition, $operator, $value)->get();
+    }
+
     public function create(array $input)
     {
         return $this->model->create($input);

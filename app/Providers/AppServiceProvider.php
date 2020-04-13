@@ -32,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', function () {
             return auth()->user() && auth()->user()->role == UserRole::Administrator;
         });
+        
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
     }
 }

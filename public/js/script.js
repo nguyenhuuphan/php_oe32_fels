@@ -4,16 +4,36 @@
 
 [Table of Contents]
 
+0. Custom Function
 1. Vars and Inits
 2. Set Header
 3. Init Menu
-4. Init Header Search
-5. Init Home Slider
-6. Initialize Milestones
+4. Logout Ajax
+5. Sound Play
 
 
 ******************************/
+
+
+/* 
+
+0. Custom Function
+
+*/
+
+function audioPlay(source, el)
+{
+    var audio = new Audio(source);
+    audio.play();
+    el.addClass('sound-active');
+    audio.addEventListener("ended", function() {
+        el.removeClass('sound-active');
+    });
+};
+
+
 $(document).ready(function() {
+
     "use strict";
 
     /* 
@@ -92,6 +112,12 @@ $(document).ready(function() {
         menuActive = false;
     }
 
+    /* 
+    
+    4. Logout Ajax
+    
+    */
+
     $(document).on('click', '#logout-btn', function(e) {
         var url = $(this).attr('data');
         $.ajax({
@@ -102,9 +128,23 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    window.location.href = '/login';
+                    window.location.replace(response.url);
+                } else {
+                    window.location.replace(response.url);
                 }
             },
         });
-    })
+    });
+
+    /* 
+    
+    5. Sound Play
+    
+    */
+
+    if ($(".list-words").length > 0) {
+        $('.list-words').on('click', 'a.item-sound', function() {
+            audioPlay($(this).attr('sound_url'), $(this));
+        });
+    }
 });
